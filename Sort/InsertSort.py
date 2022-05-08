@@ -18,6 +18,20 @@ class InsertSort():
     def __init__(self, nums):
         self.nums = nums
 
+    def insert_sort2(self):
+        for i in range(len(self.nums)):
+            now = self.nums[i]
+            for j in range(i - 1, -1, -1):
+                if now < self.nums[j]:
+                    self.nums[j + 1] = self.nums[j]
+                else:
+                    self.nums[j + 1] = now
+                    break
+        return self.nums
+
+
+
+
 
     def insert_sort(self):
 
@@ -25,20 +39,21 @@ class InsertSort():
         for i in range(len(self.nums)):
             now = self.nums[i]
             j = i - 1
-            while j>=0:
+            while j >= 0:
                 # 遍历前面有序的序列，找到插入位置
                 if now < self.nums[j]:
-                    self.nums[j + 1] = self.nums[j] # 往后挪数据，为now数据腾空间
+                    self.nums[j + 1] = self.nums[j]  # 往后挪数据，为now数据腾空间
                 else:
-                    break # 找到插入位置 break
+                    break  # 找到插入位置 break
                 j -= 1
 
-            self.nums[j+1] = now
+            self.nums[j + 1] = now
 
         return self.nums
 
 
 if __name__ == "__main__":
-    nums = [1,4,6,7,2,4,6,7,9,100]
+    nums = [1, 4, 6, 7, 2, 4, 6, 7, 9, 100]
     sort = InsertSort(nums)
-    print(sort.insert_sort())
+    # print(sort.insert_sort())
+    print(sort.insert_sort2())

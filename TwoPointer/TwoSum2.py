@@ -6,7 +6,6 @@
 @Decs:
 """
 
-
 '''
 
 question:
@@ -20,11 +19,9 @@ Output: [1,2]
 '''
 
 
-
-class Solution():
+class Solution:
     def __init__(self, nums):
-        self.nums =  nums
-
+        self.nums = nums
 
     def two_sum(self, target):
 
@@ -33,8 +30,8 @@ class Solution():
 
         res = []
         # 对撞指针遍历排好序的list，两数和大于target -> 移动右指针；两数和小于target -> 移动左指针；相等 -> 返回
-        i, j = 0, len(nums)-1
-        while j>i:
+        i, j = 0, len(nums) - 1
+        while j > i:
             if nums[j] + nums[i] > target:
                 j -= 1
             elif nums[j] + nums[i] < target:
@@ -45,11 +42,9 @@ class Solution():
         return res
 
 
-
 if __name__ == "__main__":
-    nums = [1,6,6,2,1,9,7,5,100]
+    nums = [1, 6, 6, 2, 1, 9, 7, 5, 100]
     target = 9
 
     solution = Solution(nums)
     print(solution.two_sum(target))
-

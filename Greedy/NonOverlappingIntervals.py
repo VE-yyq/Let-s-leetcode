@@ -6,7 +6,6 @@
 @Decs:
 """
 
-
 '''
 question:
 给定多个区间，计算让这些区间互不重叠所需要移除区间的最少个数。起止相连不算重叠。
@@ -20,8 +19,7 @@ Output: 1
 
 class Solution():
     def __init__(self, intervals):
-        self.intervals =  intervals
-
+        self.intervals = intervals
 
     def erase_overlap_intervals(self):
 
@@ -34,15 +32,16 @@ class Solution():
         intervals = self.intervals
 
         # 按区间终止位置排好序
-        intervals = sorted(intervals, key=lambda x:x[1])
+        intervals = sorted(intervals, key =lambda x: x[1])
         count = 1
         end = intervals[0][1]
-        for interval in intervals: # 贪心在 永远想要使得剩下可选择区间最大的，但是只能选择符合下面条件的
-            if interval[0] >= end: # 当下一个区间开始位置>=上一个区间结束位置，则为可以选择的区间
+        for interval in intervals:  # 贪心在 永远想要使得剩下可选择区间最大的，但是只能选择符合下面条件的
+            if interval[0] >= end:  # 当下一个区间开始位置>=上一个区间结束位置，则为可以选择的区间
                 end = interval[1]
                 count += 1
 
         return len(intervals) - count
+
 
 '''
 note:
@@ -51,7 +50,7 @@ note:
 '''
 
 if __name__ == "__main__":
-    intervals = [[1,3],[3,5],[2,7],[3,7],[2,3],[5,8],[7,8]]
+    intervals = [[1, 3], [3, 5], [2, 7], [3, 7], [2, 3], [5, 8], [7, 8]]
 
     solution = Solution(intervals)
     print(solution.erase_overlap_intervals())

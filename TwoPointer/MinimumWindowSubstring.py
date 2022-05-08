@@ -6,7 +6,6 @@
 @Decs:
 """
 
-
 '''
 
 给定两个字符串S 和T，求S 中包含T 所有字符的最短连续子字符串的长度，同时要求时间
@@ -20,15 +19,15 @@ Output: "BANC"
 '''
 
 
-class Solution():
+class Solution:
 
     def min_window(self, S, T):
-        '''
+        """
         思路就是：先移动右指针找到符合题意的区间，再移动左指针缩短区间至最短。
             直至右指针到S串的最后，最后再移动一次左指针缩短区间，得到最短子串和其起始索引
 
             PS：因无顺序要求，判断是否符合题意可以用hashMap去完成
-        '''
+        """
 
         sub = ""
         start, end = 0, 0
@@ -68,13 +67,13 @@ class Solution():
         return sub
 
     def satisfied(self, need, window):
-        for k,v in need.items():
+        for k, v in need.items():
             if need[k] > window[k]:
                 return False
         return True
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     S = "ADOBCODEBANBC"
     T = "ABC"
 

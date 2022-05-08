@@ -6,8 +6,6 @@
 @Decs:
 """
 
-
-
 '''
 question:
 给定一个小写字符串S，将其尽可能多地分隔成多个子串，要求每个字母都只出现在一个子串中，依次返回每个子串的长度。
@@ -20,10 +18,10 @@ Explanation:
 The partition is "ababcbaca", "defegde", "hijhklij".
 '''
 
-class Solution():
-    def __init__(self, s):
-        self.s =  s
 
+class Solution:
+    def __init__(self, s):
+        self.s = s
 
     def partition_labels(self):
 
@@ -41,19 +39,19 @@ class Solution():
         start, end = 0, 0
 
         for i in range(len(s)):
-            end = max(s_dict[s[i]], end) #贪心在 max取下标i及i前的所有字符的最大值，一次性划了一个大窗口
-            if i == end: # 只有当前索引等于大窗口的结束索引时，子串结束
-                sub_s.append(i - start + 1) # 纪录子串当前长度
-                start, end = i + 1, i + 1 #初始化子串开始位置和结束位置 (起始end位置不需要初始化，在循环中必然会被更新，为保证一致性)
+            end = max(s_dict[s[i]], end)  # 贪心在 max取下标i及i前的所有字符的最大值，一次性划了一个大窗口
+            if i == end:  # 只有当前索引等于大窗口的结束索引时，子串结束
+                sub_s.append(i - start + 1)  # 纪录子串当前长度
+                start, end = i + 1, i + 1  # 初始化子串开始位置和结束位置 (起始end位置不需要初始化，在循环中必然会被更新，为保证一致性)
 
         return sub_s
-
 
     """
     note：
     其实质上是s_dict维护了一个区间，对一个字符串，维护了一个[[字母第一次出现的索引，字母最后一次出现的索引], ...]，然后对区间进行合并，又回到区间操作的老问题了
     即，故有以下解法，思路一样，抽象为区间问题，先排序再贪心。
     """
+
     def partition_labels_intervals(self):
 
         s = self.s
@@ -74,7 +72,7 @@ class Solution():
         note:
         对区间的开始或终止排序后再操作，是有所不同的，各种不同，请多做习题体会。
         """
-        char_list = sorted(s_dict.values(), key=lambda x:x[0])
+        char_list = sorted(s_dict.values(), key=lambda x: x[0])
         print(char_list)
 
         end = char_list[0][1]
@@ -83,12 +81,12 @@ class Solution():
                 sub_s.append(char[0])
                 end = char[1]
             else:
-                end = max(end, char[1]) # 被合并区间任意两个有交集就可以合并，所以有取max这一操作，每次在合并后，验证是否需要延长结束区间长度
+                end = max(end, char[1])  # 被合并区间任意两个有交集就可以合并，所以有取max这一操作，每次在合并后，验证是否需要延长结束区间长度
 
         sub_s = [0] + sub_s + [len(s)]
         res = []
-        for i in range(len(sub_s)-1):
-            res.append(sub_s[i+1] - sub_s[i])
+        for i in range(len(sub_s) - 1):
+            res.append(sub_s[i + 1] - sub_s[i])
 
         return res
 

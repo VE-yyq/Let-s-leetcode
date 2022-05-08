@@ -18,6 +18,20 @@ class BubbleSort():
         self.nums = nums
 
 
+    def bubble_sort2(self):
+        for i in range(len(self.nums)):
+            flag = False
+            for j in range(len(self.nums) - 1 - i):
+                if self.nums[j] > self.nums[j + 1]:
+                    temp = self.nums[j]
+                    self.nums[j] = self.nums[j + 1]
+                    self.nums[j + 1] = temp
+                    flag = True
+            if not flag:
+                return self.nums
+
+
+
     def bubble_sort(self):
 
         # bubbleSort每轮外层循环确定一个最小or最大值位置，故最多进行len(self.nums)次循环
@@ -36,4 +50,6 @@ class BubbleSort():
 if __name__ == "__main__":
     nums = [1,4,6,7,2,4,6,7,9,100]
     sort = BubbleSort(nums)
-    print(sort.bubble_sort())
+    # print(sort.bubble_sort())
+    print(sort.bubble_sort2())
+

@@ -26,7 +26,7 @@
 '''
 
 
-class Solution():
+class Solution:
     def __init__(self, people):
         self.people = people
 
@@ -39,24 +39,22 @@ class Solution():
     '''
 
     def queue_reconstruction(self):
-
         people = self.people
         queue = []
 
         # ki维度
-        people = sorted(people, key=lambda x:(x[0], -x[1]), reverse=True) # 按hi从高到低排好序，且在同一个高度hi下的ki是相对有序的
+        people = sorted(people, key=lambda x: (x[0], -x[1]), reverse=True)  # 按hi从高到低排好序，且在同一个高度hi下的ki是相对有序的
         print(people)
 
         for i in people:
             # 因遍历排好序的people过程中，取到的当前的hi永远小于等于queue内的hi，并且ki越小越先取到，所以对于当前的[hi, ki]，结合ki定义，ki就是其插入的位置
-            queue.insert(i[1], i) # 遍历的时候将当前元素插入到ki维度内，每次插入过程都是局部最优解，最终插入完成达到全局最优
+            queue.insert(i[1], i)  # 遍历的时候将当前元素插入到ki维度内，每次插入过程都是局部最优解，最终插入完成达到全局最优
 
         return queue
 
 
-
 if __name__ == "__main__":
-    prices = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]
+    prices = [[7, 0], [4, 4], [7, 1], [5, 0], [6, 1], [5, 2]]
 
     solution = Solution(prices)
     print(solution.queue_reconstruction())

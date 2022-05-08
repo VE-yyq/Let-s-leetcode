@@ -6,7 +6,6 @@
 @Decs:
 """
 
-
 '''
 给定一个字符串，找到最多有k个不同字符的最长子字符串。
 
@@ -20,7 +19,6 @@ O(n), n 是所给字符串的长度
 
 
 class Solution():
-
     '''
     有k个不同字符的最长子字符串：很快能想到用hashMap去存储这k个不同的字符，以及它们的个数
 
@@ -58,7 +56,6 @@ class Solution():
             right += 1
 
         return res
-
 
 
 if __name__ == "__main__":

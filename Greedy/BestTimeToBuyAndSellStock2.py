@@ -24,9 +24,9 @@
 '''
 
 
-class Solution():
+class Solution:
     def __init__(self, prices):
-        self.prices =  prices
+        self.prices = prices
 
     '''
     根据此题的题意，说明可以在卖出当日，同时进行买入，且并没有要求给出进行交易的时间，所以可以把问题转变成子问题：每天是否进行交易，进行是否有纯收益。
@@ -35,13 +35,14 @@ class Solution():
     
     当然能分析到这里，说明此问题也可动态规划解。
     '''
+
     def best_time_maximum_profit(self):
 
         prices = self.prices
         profit = 0.0
 
         for i in range(len(prices) - 1):
-            profit += max(0, prices[i+1] - prices[i]) # 每天的最大收益
+            profit += max(0, prices[i + 1] - prices[i])  # 每天的最大收益
 
         return profit
 
@@ -53,6 +54,7 @@ class Solution():
     dp[i][0] = max{dp[i-1][0], dp[i-1][1] + prices[i]} # 分别表示前一天也未持有股票，和前一天持有股票并在今天把股票卖出
     dp[i][1] = max{dp[i-1][0] - prices[i], dp[i-1][1]} # 分别表示前一天也未持有股票并买入当天股票，和前一天已持有股票
     '''
+
     def best_time_maximum_profit_dp(self):
 
         prices = self.prices
@@ -60,22 +62,21 @@ class Solution():
 
         # 这里有一个python的小坑，直接用乘号创建多维list，第一个乘号正常，但第二个乘号" * len(prices)"存在浅拷贝，只是分配了指针而没有内存的问题，故创建多维数组需要使用列表推到式
         # dp = [ [0.]*2 ] * len(prices)
-        dp = [[0. for i in range(2)] for j in range(len(prices))] # dp这里把保证每天纯利润最大的前提下，纪录每天的收益
+        dp = [[0. for i in range(2)] for j in range(len(prices))]  # dp这里把保证每天纯利润最大的前提下，纪录每天的收益
 
         dp[0][0] = 0.0
         dp[0][1] = -prices[0]
         for i in range(1, len(prices)):
-            dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-            dp[i][1] = max(dp[i-1][0] - prices[i], dp[i-1][1])
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][0] - prices[i], dp[i - 1][1])
 
-        profit = max(dp[len(prices)-1][0], dp[len(prices)-1][1])
+        profit = max(dp[len(prices) - 1][0], dp[len(prices) - 1][1])
 
         return profit
 
 
-
 if __name__ == "__main__":
-    prices = [3,6,1,6,2,2,2,7,9]
+    prices = [3, 6, 1, 6, 2, 2, 2, 7, 9]
 
     solution = Solution(prices)
     print(solution.best_time_maximum_profit())

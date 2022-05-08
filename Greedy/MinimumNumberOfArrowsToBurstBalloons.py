@@ -6,7 +6,6 @@
 @Decs:
 """
 
-
 '''
 question:
 在二维空间中有许多球形的气球。对于每个气球，提供的输入是水平方向上，气球直径的开始和结束坐标。由于它是水平的，所以纵坐标并不重要，因此只要知道开始和结束的横坐标就足够了。开始坐标总是小于结束坐标。
@@ -22,10 +21,10 @@ Output:
 对于该样例，x = 6 可以射爆 [2,8],[1,6] 两个气球，以及 x = 11 射爆另外两个气球
 '''
 
-class Solution():
-    def __init__(self, points):
-        self.points =  points
 
+class Solution:
+    def __init__(self, points):
+        self.points = points
 
     def minimum_number_of_arrows(self):
 
@@ -34,13 +33,13 @@ class Solution():
         # 故问题变成当区间两两之间都有交集时，则合并区间，问最后区间一共有多少个 ？
 
         # 按区间终止位置升序排序
-        points = sorted(self.points, key=lambda x:x[1])
+        points = sorted(self.points, key=lambda x: x[1])
         print(points)
         count = 1
 
         end = points[0][1]
-        for i in range(len(points)): # 贪心在 想一支箭尽量射中可能多的气球
-            if points[i][0] > end: # 当满足这一区间起始位置 > 上一区间终止位置时，两者无交集，则count++
+        for i in range(len(points)):  # 贪心在 想一支箭尽量射中可能多的气球
+            if points[i][0] > end:  # 当满足这一区间起始位置 > 上一区间终止位置时，两者无交集，则count++
                 count += 1
                 end = points[i][1]
                 print(points[i])
@@ -62,10 +61,10 @@ class Solution():
         return count
 
 
-
 if __name__ == "__main__":
     # points = [[1,3],[3,5],[2,7],[2,2],[2,3],[5,8],[7,8]]
-    points = [[1, 5], [4, 7], [0, 8], [11, 11], [13, 13], [9, 14], [10, 15], [16, 19], [20, 20], [21, 21], [17, 22], [18, 23]]
+    points = [[1, 5], [4, 7], [0, 8], [11, 11], [13, 13], [9, 14], [10, 15], [16, 19], [20, 20], [21, 21], [17, 22],
+              [18, 23]]
 
     solution = Solution(points)
     print(solution.minimum_number_of_arrows())

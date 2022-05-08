@@ -12,19 +12,20 @@ Given a non-negative integer c, your task is to decide whether there’re two in
 
 '''
 
-class Solution():
+
+class Solution:
     def two_square_sum(self, num):
 
         res = []
         sqrt_num = self.sqrt(num)
         print("sqrt_num: ", sqrt_num)
 
-        right = int (sqrt_num) + (1 if sqrt_num%1 else 0)
+        right = int(sqrt_num) + (1 if sqrt_num % 1 else 0)
         left = 0
         print("right: ", right)
 
         while left < right:
-            if left ** 2 + right ** 2 == num :
+            if left ** 2 + right ** 2 == num:
                 res.append(left)
                 res.append(right)
                 break
@@ -38,7 +39,6 @@ class Solution():
             return True
         else:
             return False
-
 
     def sqrt(self, num, p=0.00001):
 
@@ -54,7 +54,6 @@ class Solution():
 
 
 if __name__ == "__main__":
-
     num = 19
     solution = Solution()
     print(solution.two_square_sum(num))

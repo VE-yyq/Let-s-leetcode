@@ -22,8 +22,7 @@ question：
 
 class Solution():
     def __init__(self, array):
-        self.array =  array
-
+        self.array = array
 
     def check_possibility(self):
         """
@@ -37,13 +36,12 @@ class Solution():
         # 1、考虑array为： ...1, 4, 2, 3,... 有两种方法，a). 4 -> 2 正解，因为对于i的位置来说，在满足非递减原则下，其值越小越好，越容易满足i+1及其后面非递减的原则；b). 2 -> 4
         # 2、考虑array为： ...3, 4, 2, 3,... 只有一种方法，a). 2 -> 4 (虽然调整后i-1,i,i+1也不能满足非递减的原则，但是i-2,i-1,i三个元素必然需要调整一次值，所以改例子并不能在改变 1 个元素的情况下，使之变成一个非递减数列)
 
-
         N = len(array)
         count = 0
         for i in range(1, N):
             if array[i] < array[i - 1]:
                 count += 1
-                if i == 1 or array[i] >= array[i - 2]: # short-circuit or
+                if i == 1 or array[i] >= array[i - 2]:  # short-circuit or
                     array[i - 1] = array[i]
                 else:
                     array[i] = array[i - 1]

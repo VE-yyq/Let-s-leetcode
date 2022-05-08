@@ -20,30 +20,28 @@ Output: 5
 
 class Solution():
     def __init__(self, children):
-        self.children =  children
-
+        self.children = children
 
     def candy(self):
 
-        '''
+        """
         需要考虑从左向右和从右向左两个维度，当两者同时考虑时会有所疏漏，需要分别考虑，两次贪心完成
         Returns:
 
-        '''
+        """
         children = self.children
         # 先初始化每个小孩一块糖果
         nums = [1] * len(children)
         print("children:", children)
 
         # 这里显然一次循环不足以同时考虑左边右边孩子的得分关系，需要在每次循环找到其极限下的局部最优，即每次循环确定一个方向上的大小关系，对应给孩子糖果
-        for i in range(0, len(children)-1):
-            if children[i] < children[i + 1]: # 只处理了 children[i] < children[i+1]的case
-                nums[i + 1] = nums[i] + 1 # 贪心同时表现在每次只多给1块糖果
+        for i in range(0, len(children) - 1):
+            if children[i] < children[i + 1]:  # 只处理了 children[i] < children[i+1]的case
+                nums[i + 1] = nums[i] + 1  # 贪心同时表现在每次只多给1块糖果
         print("left->right candy: ", nums)
 
-
-        for i in range(len(children)-1, 0, -1):
-            if children[i] < children[i - 1]: # 只处理了 children[i-1] > children[i+1]的case
+        for i in range(len(children) - 1, 0, -1):
+            if children[i] < children[i - 1]:  # 只处理了 children[i-1] > children[i+1]的case
                 nums[i - 1] = max(nums[i] + 1, nums[i - 1])
                 # 取max的缘由 (或者在if内加 nums[i] + 1 > nums[i - 1] 条件)：
                 # children: [1,2,3,4,5,0]
@@ -56,9 +54,8 @@ class Solution():
         return number
 
 
-
 if __name__ == "__main__":
-    children = [1,6,6,6,4,2,4,2,7,5,100]
+    children = [1, 6, 6, 6, 4, 2, 4, 2, 7, 5, 100]
 
     solution = Solution(children)
     print(solution.candy())
