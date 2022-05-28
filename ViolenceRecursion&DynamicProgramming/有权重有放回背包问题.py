@@ -47,13 +47,43 @@ class Solution:
             number += 1
         return ways
 
+    def dp_combination(self, limit_price):
+        """
+        递归当中有两个变量，一个index 一个limit_price，所以dp应该是一个二维的表，dp[i][j]表示当剩余j的price需要凑的情况下，只使用下标为i及其之后的币种情况下，此时对i的讨论，一共有dp[i][j]种取法
+        初始化为递归的base case，即：dp[...][0] = 1
+                                    和 dp[len(self.coins)][...] = 0
+        """
+
+        index = len(self.coins)
+        # 构建一个 (index + 1) * (limit_price + 1) 形状的dp表，分别表示 第index块的币种 和 剩余j的price
+        dp = [[-1 for j in range(limit_price + 1)] for i in range(index + 1)]
+        print(dp)
+
+        # 初始化dp[len(self.coins)][...] = 0，即遍历完所有币种，还有待凑金额，凑失败了，返回0
+        for i in range(len(dp[index])):
+            dp[index][i] = 0
+
+        # 初始化dp[...][0] = 1，即当待凑金额为0时，该位置为1；其实只初始化最后一列也可以
+        dp[index][0] = 1
+        # for i in range(len(dp)):
+        #     dp[i][0] = 1
+
+        for i in range(index - 1, -1, -1):  # 从base case 往前推
+            for j in range(len(dp[i])):
+                number = 0
+                ways = 0  # 临时存储当前dp[i][j]值
+                while number * self.coins[i] <= j:
+                    ways += (dp[i + 1][j - number * self.coins[i]])
+                    number += 1
+                dp[i][j] = ways
+        print(dp)
+
+        return dp[0][limit_price]
+
 
 if __name__ == "__main__":
     coins = [1, 2, 5, 10, 20, 50, 100]
-    limit = 100
+    limit = 10
     s = Solution(coins)
     s.combination(limit)
-
-"""
-
-"""
+    print(s.dp_combination(limit))
