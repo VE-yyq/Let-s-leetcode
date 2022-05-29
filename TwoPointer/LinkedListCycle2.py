@@ -43,14 +43,33 @@ class Solution:
         Returns:
 
         """
-        head = link_list.head
-        p = head
-        node_list = []
-        while p not in node_list and p:
-            node_list.append(p)
-            p = p.next
+        fast, slow = head, head
+        is_loop = False
+        while fast is not None and fast.next is not None:
+            fast = fast.next.next
+            slow = slow.next
 
-        return p
+            if fast == slow:  # 循环内遇见就绝对会有环，因为慢指针永远追不上快指针
+                is_loop = True
+                break
+
+        if is_loop:
+            # 固定快指针，慢指针继续跑，下一次相遇就是环长
+            slow = slow.next
+            loop_length = 1
+            while slow != fast:
+                slow = slow.next
+                loop_length += 1
+            print("环长：", loop_length)
+
+            # 把快指针放回起点，慢指针从相遇处出发，两者速度一致，在下次相遇则是入环点。证明看 FloydCycle.md
+            fast = head
+            while fast != slow:
+                fast = fast.next
+                slow = slow.next
+            return fast
+        else:
+            return None
 
 
 if __name__ == "__main__":
